@@ -9,7 +9,7 @@ public record BarStationResponseDto(
     String name,
     String description,
     Boolean isActive,
-    List<UserDTO> assignedUsers,
+    List<UserSummaryResponseDto> assignedUsers,
     Instant createdAt,
     Instant updatedAt
 ) {

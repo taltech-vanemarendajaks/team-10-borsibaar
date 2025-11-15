@@ -1,6 +1,7 @@
 package com.borsibaar.mapper;
 
 import com.borsibaar.dto.UserDTO;
+import com.borsibaar.dto.UserSummaryResponseDto;
 import com.borsibaar.entity.Role;
 import com.borsibaar.entity.User;
 import org.mapstruct.*;
@@ -15,6 +16,9 @@ public interface UserMapper {
     @Mapping(target = "role", source = "role", qualifiedByName = "roleToName")
     @Mapping(target = "token", ignore = true)
     UserDTO toDto(User user);
+
+    @Mapping(target = "role", source = "role", qualifiedByName = "roleToName")
+    UserSummaryResponseDto toSummaryDto(User user);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "organizationId", ignore = true)
