@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { backendUrl } from "@/utils/constants";
 
 export async function GET(
     request: NextRequest,
     { params }: { params: Promise<{ productId: string }> }
 ) {
     try {
-        const backendUrl =
-            process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
-
         const response = await fetch(
             `${backendUrl}/api/inventory/product/${(await params).productId}/history`,
             {

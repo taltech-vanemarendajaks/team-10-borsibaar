@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { backendUrl } from "@/utils/constants";
 
 export async function GET(request: NextRequest) {
     try {
-        const backendUrl =
-            process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
-
         const response = await fetch(`${backendUrl}/api/inventory/sales-stats`, {
             method: "GET",
             headers: {

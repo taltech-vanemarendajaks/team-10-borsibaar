@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { backendUrl } from "@/utils/constants";
 
 export async function GET(request: NextRequest) {
     try {
-        const backendUrl =
-            process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
-
         // Get the categoryId parameter from the request URL
         const { searchParams } = new URL(request.url);
         const categoryId = searchParams.get("categoryId");

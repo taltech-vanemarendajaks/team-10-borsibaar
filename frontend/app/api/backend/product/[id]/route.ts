@@ -1,4 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
+import { backendUrl } from "@/utils/constants";
 
 export async function DELETE(
     request: NextRequest,
@@ -6,9 +7,6 @@ export async function DELETE(
 ) {
     const { id } = await params;
     try {
-        const backendUrl =
-            process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
-
         const response = await fetch(`${backendUrl}/api/products/${id}`, {
             method: "DELETE",
             headers: {

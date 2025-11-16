@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { backendUrl } from "@/utils/constants";
 
 // Proxy endpoint for a single organization resource
 export async function GET(
@@ -7,8 +8,6 @@ export async function GET(
 ) {
   const { id } = await params;
   try {
-    const backendUrl =
-      process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
     const response = await fetch(
       `${backendUrl}/api/organizations/${encodeURIComponent(id)}`,
       {

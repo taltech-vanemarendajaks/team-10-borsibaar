@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+import { backendUrl } from "@/utils/constants";
 
 export async function POST(request: NextRequest) {
   try {
     // Call backend logout endpoint to invalidate session
-    await fetch(`${BACKEND_URL}/auth/logout`, {
+    await fetch(`${backendUrl}/auth/logout`, {
       method: "POST",
       headers: {
         Cookie: request.headers.get("cookie") || "",
