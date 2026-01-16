@@ -8,3 +8,7 @@ backend/.env
 nginx/ssl/
 *.pem
 *.key
+
+# AI instructions
+AGENTS.md
+
