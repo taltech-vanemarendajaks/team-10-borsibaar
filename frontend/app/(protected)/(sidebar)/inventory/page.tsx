@@ -12,6 +12,7 @@ import {
   User,
   ListPlus,
   Trash,
+  Funnel,
 } from "lucide-react";
 
 interface InventoryTransactionResponseDto {
@@ -69,7 +70,9 @@ export default function Inventory() {
   });
   const [showCreateProductModal, setShowCreateProductModal] = useState(false);
   const [showDeleteProductModal, setShowDeleteProductModal] = useState(false);
+  const [showAllCategoriesModal, setShowAllCategoriesModal] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
   const [categoryForm, setCategoryForm] = useState({
     name: "",
@@ -91,10 +94,16 @@ export default function Inventory() {
     fetchCategories();
   }, []);
 
-  const fetchInventory = async () => {
+  const fetchInventory = async (categoryId: number) => {
+    let url = "/api/backend/inventory"
+
+    if (categoryId != null) {
+      url = `/api/backend/inventory?categoryId=${categoryId}`
+    }
+
     try {
       setLoading(true);
-      const response = await fetch("/api/backend/inventory", {
+      const response = await fetch(url, {
         cache: "no-store",
       });
 
@@ -371,6 +380,7 @@ export default function Inventory() {
     setShowHistoryModal(false);
     setShowCreateCategoryModal(false);
     setShowDeleteProductModal(false);
+    setShowAllCategoriesModal(false);
     setSelectedProduct(null);
     setFormData({ quantity: "", notes: "", referenceId: "" });
     setTransactionHistory([]);
@@ -464,6 +474,13 @@ export default function Inventory() {
               >
                 <Plus className="w-4 h-4" />
                 <span className="flex">New Product</span>
+              </Button>
+              <Button
+                onClick={() => setShowAllCategoriesModal(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-black rounded-lg hover:bg-blue-200 transition font-medium"
+              >
+                <Funnel className="w-4 h-4" />
+                <span className="flex">Filter by category</span>
               </Button>
               <div className="text-sm text-gray-400">
                 Total Items: {inventory.length}
@@ -837,6 +854,58 @@ export default function Inventory() {
               }}
             >
               Delete
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showAllCategoriesModal} onOpenChange={setShowAllCategoriesModal}>
+        <DialogContent className="sm:max-w-[480px]">
+          <DialogHeader>
+            <DialogTitle>Filter categories</DialogTitle>
+            <DialogDescription>
+              Pick a category
+            </DialogDescription>
+          </DialogHeader>
+          <div>
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {categories.map((cat) => (
+                <div
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`p-3 rounded-lg cursor-pointer border transition
+                    ${selectedCategory?.id === cat.id 
+                      ? "border-blue-500 bg-blue-900/30" 
+                      : "border-gray-700 hover:bg-gray-800"
+                    }`}
+                >
+                  <span className="font-medium">{cat.name}</span>
+                  {cat.dynamicPricing && (
+                    <span className="ml-2 text-xs text-gray-400">Dynamic Pricing</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 flex justify-end gap-3">
+            <Button
+              variant="outline"
+              onClick={() => {
+                closeModals()
+              }}
+              >
+              Cancel
+            </Button>
+            <Button
+              className="bg-blue-900/30 hover:bg-rose-700 text-white"
+              onClick={() => {
+                console.log(selectedCategory.id)
+                fetchInventory(selectedCategory.id)
+                closeModals()
+              }}
+            >
+              Filter
             </Button>
           </div>
         </DialogContent>
