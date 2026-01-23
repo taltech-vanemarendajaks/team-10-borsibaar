@@ -126,6 +126,18 @@ export default function Inventory() {
     }
   };
 
+  const fetchCategory = async (categoryId: number) => {
+    try {
+      const response = await fetch(`/api/backend/categories/${categoryId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setCategories(data);
+      }
+    } catch (err) {
+      console.error("Error fetching categories:", err);
+    }
+  };
+
   const fetchTransactionHistory = async (productId: number) => {
     try {
       setLoadingHistory(true);
