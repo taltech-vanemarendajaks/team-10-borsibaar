@@ -444,31 +444,39 @@ export default function Inventory() {
               Inventory Management
             </h1>
           </div>
+          <div className="text-sm text-gray-400">
+            Total Items: {inventory.length}
+          </div>
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="icon"
               className="md:hidden"
-              onClick={() => setIsMobileMenuOpen(true)}
+              onClick={() => setIsMobileMenuOpen(v => !v)}
             >
               <Menu className="w-6 h-6 text-gray-100" />
             </Button>
-            <Button
-              onClick={() => setShowCreateCategoryModal(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-black rounded-lg hover:bg-blue-200 transition font-medium"
+            <div
+              className={`
+    flex gap-4 transition-all
+    md:items-center
+    ${isMobileMenuOpen ? "flex-col mt-4 md:mt-0" : "hidden md:flex"}
+  `}
             >
-              <ListPlus className="w-4 h-4" />
-              <span className="flex">New Category</span>
-            </Button>
-            <Button
-              onClick={() => setShowCreateProductModal(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
-            >
-              <Plus className="w-4 h-4" />
-              <span className="flex">New Product</span>
-            </Button>
-            <div className="text-sm text-gray-400">
-              Total Items: {inventory.length}
+              <Button
+                onClick={() => { setShowCreateCategoryModal(true); setIsMobileMenuOpen(false); }}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-black rounded-lg hover:bg-blue-200 transition font-medium"
+              >
+                <ListPlus className="w-4 h-4" />
+                <span className="flex">New Category</span>
+              </Button>
+              <Button
+                onClick={() => { setShowCreateProductModal(true); setIsMobileMenuOpen(false); }}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              >
+                <Plus className="w-4 h-4" />
+                <span className="flex">New Product</span>
+              </Button>
             </div>
           </div>
         </div>
