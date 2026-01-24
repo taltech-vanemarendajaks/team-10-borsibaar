@@ -55,6 +55,10 @@ export default function Inventory() {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
   const [showAddModal, setShowAddModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [showAdjustModal, setShowAdjustModal] = useState(false);
@@ -447,32 +451,37 @@ export default function Inventory() {
           <div className="text-sm text-gray-400">
             Total Items: {inventory.length}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 relative">
             <Button
               variant="ghost"
               size="icon"
               className="md:hidden"
-              onClick={() => setIsMobileMenuOpen(v => !v)}
+              onClick={toggleMobileMenu}
             >
               <Menu className="w-6 h-6 text-gray-100" />
             </Button>
             <div
               className={`
-    flex gap-4 transition-all
-    md:items-center
-    ${isMobileMenuOpen ? "flex-col mt-4 md:mt-0" : "hidden md:flex"}
-  `}
+          ${isMobileMenuOpen ? "flex" : "hidden"} 
+          flex-col gap-2 absolute top-12 right-0 z-50 bg-card border border-gray-700 rounded-lg shadow-lg p-4 w-56 md:static md:flex md:flex-row md:gap-4 md:p-0 md:w-auto md:bg-transparent md:border-0 md:shadow-none
+          `}
             >
               <Button
-                onClick={() => { setShowCreateCategoryModal(true); setIsMobileMenuOpen(false); }}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-black rounded-lg hover:bg-blue-200 transition font-medium"
+                onClick={() => {
+                  setShowCreateCategoryModal(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-100 text-black rounded-lg hover:bg-blue-200 transition font-medium w-full md:w-auto"
               >
                 <ListPlus className="w-4 h-4" />
                 <span className="flex">New Category</span>
               </Button>
               <Button
-                onClick={() => { setShowCreateProductModal(true); setIsMobileMenuOpen(false); }}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                onClick={() => {
+                  setShowCreateProductModal(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium w-full md:w-auto"
               >
                 <Plus className="w-4 h-4" />
                 <span className="flex">New Product</span>
