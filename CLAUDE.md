@@ -51,6 +51,22 @@ docker-compose up
 docker-compose up postgres backend
 ```
 
+## Team Workflow
+
+### Branch Naming
+* Format: `<issue-number>-short-description`
+* Only lowercase, numbers, hyphens
+* Example: `24-update-claude-md`
+* **Direct push to main is FORBIDDEN**
+```bash
+
+```
+### Commit Messages
+* Use imperative, present tense
+* Start with lowercase
+* Be descriptive
+
+
 ## Key Backend Architecture
 
 The Spring Boot backend follows a layered architecture:
