@@ -46,10 +46,10 @@ export function ProductCard({
               "text-green-400": product.unitPrice < product.basePrice,
             })}
           >
-            ${product.unitPrice.toFixed(2)}
+            {product.unitPrice.toFixed(2)}€
           </span>
           <span className="text-xs text-white opacity-50">
-            ${product.basePrice?.toFixed(2)}
+            {product.basePrice?.toFixed(2)}€
           </span>
         </div>
         <span

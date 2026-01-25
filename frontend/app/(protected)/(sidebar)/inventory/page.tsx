@@ -104,7 +104,7 @@ export default function Inventory() {
         cache: "no-store",
       });
 
-      if (!response.ok) throw new Error("Failed to fetch inventory");
+      if (!response.ok) throw new Error("Unable to load inventory data");
 
       const data = await response.json();
       setInventory(data);
