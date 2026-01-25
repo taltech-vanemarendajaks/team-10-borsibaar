@@ -27,8 +27,7 @@
 - Only lowercase letters, numbers and hypens are used in branch names ex: <123-short-title>
 - Commit messages are written in the imperative, present tense
 
-
-## Merging strategiess
+## Merge strategies used
 -We used merge commit and squash and merge strategies. 
 -Merge commit was used to preserve full commit history when needed.
 -Squash and merge was used to keep the main branch history clean by combining multiple commits into one. 
