@@ -49,7 +49,7 @@ public class Inventory {
     private Product product;
 
     @OneToMany(mappedBy = "inventory", fetch = FetchType.LAZY)
-    private Set<InventoryTransaction> transactions = new HashSet<>();
+    private final Set<InventoryTransaction> transactions = new HashSet<>();
 
     // Custom constructor for easy creation
     public Inventory(Long organizationId, Product product, BigDecimal quantity, BigDecimal adjustedPrice) {
