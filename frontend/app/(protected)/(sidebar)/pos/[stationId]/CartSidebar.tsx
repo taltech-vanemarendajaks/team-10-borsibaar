@@ -52,7 +52,7 @@ export function CartSidebar({
                     {itemCount} {itemCount === 1 ? "item" : "items"}
                   </div>
                   <div className="text-lg font-bold text-gray-100">
-                    ${cartTotal.toFixed(2)}
+                    {cartTotal.toFixed(2)} €
                   </div>
                 </div>
               </div>
@@ -153,8 +153,8 @@ export function CartSidebar({
                       {item.productName}
                     </p>
                     <p className="text-sm text-gray-400">
-                      ${item.unitPrice.toFixed(2)} × {item.quantity} = $
-                      {(item.unitPrice * item.quantity).toFixed(2)}
+                      {item.unitPrice.toFixed(2)} € × {item.quantity} = {" "}
+                      {(item.unitPrice * item.quantity).toFixed(2)} €
                     </p>
                   </div>
                   <div className="hidden lg:flex items-center justify-between gap-2">
@@ -204,8 +204,8 @@ export function CartSidebar({
                   </div>
                   {/* Price for smaller screens */}
                   <p className="text-xs sm:text-sm text-gray-400 lg:hidden">
-                    ${item.unitPrice.toFixed(2)} × {item.quantity} = $
-                    {(item.unitPrice * item.quantity).toFixed(2)}
+                    {item.unitPrice.toFixed(2)} € × {item.quantity} = {" "}
+                    {(item.unitPrice * item.quantity).toFixed(2)} €
                   </p>
                 </div>
               ))}
@@ -214,7 +214,7 @@ export function CartSidebar({
             <div className="border-t border-gray-600 pt-4 mb-4">
               <div className="flex justify-between text-lg font-bold text-gray-100">
                 <span>Total:</span>
-                <span>${cartTotal.toFixed(2)}</span>
+                <span>{cartTotal.toFixed(2)} €</span>
               </div>
             </div>
 
