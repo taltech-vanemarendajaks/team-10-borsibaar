@@ -35,7 +35,7 @@ public class Inventory {
     @Column(nullable = false, precision = 19, scale = 4)
     private BigDecimal quantity;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
@@ -48,8 +48,8 @@ public class Inventory {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @OneToMany(mappedBy = "inventory")
-    private Set<InventoryTransaction> transactions = new HashSet<>();
+    @OneToMany(mappedBy = "inventory", fetch = FetchType.LAZY)
+    private final Set<InventoryTransaction> transactions = new HashSet<>();
 
     // Custom constructor for easy creation
     public Inventory(Long organizationId, Product product, BigDecimal quantity, BigDecimal adjustedPrice) {
