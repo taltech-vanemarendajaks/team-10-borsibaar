@@ -28,7 +28,7 @@
 - Commit messages are written in the imperative, present tense
 
 
-## Merging strategies
+## Merging strategiess
 -We used merge commit and squash and merge strategies. 
 -Merge commit was used to preserve full commit history when needed.
 -Squash and merge was used to keep the main branch history clean by combining multiple commits into one. 
