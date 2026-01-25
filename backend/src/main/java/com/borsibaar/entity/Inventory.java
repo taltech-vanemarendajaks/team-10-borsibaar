@@ -35,7 +35,7 @@ public class Inventory {
     @Column(nullable = false, precision = 19, scale = 4)
     private BigDecimal quantity;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
