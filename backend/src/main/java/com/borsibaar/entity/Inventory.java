@@ -48,7 +48,7 @@ public class Inventory {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @OneToMany(mappedBy = "inventory")
+    @OneToMany(mappedBy = "inventory", fetch = FetchType.LAZY)
     private Set<InventoryTransaction> transactions = new HashSet<>();
 
     // Custom constructor for easy creation
