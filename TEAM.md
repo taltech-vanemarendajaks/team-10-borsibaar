@@ -26,3 +26,9 @@
 - A new branch is created per each Issue and named after the issue.
 - Only lowercase letters, numbers and hypens are used in branch names ex: <123-short-title>
 - Commit messages are written in the imperative, present tense
+
+## Merge strategies
+-We used merge commit and squash and merge strategies. 
+-Merge commit was used to preserve full commit history when needed.
+-Squash and merge was used to keep the main branch history clean by combining multiple commits into one. 
+-We encountered merge conflicts when multiple team members edited the same files.
