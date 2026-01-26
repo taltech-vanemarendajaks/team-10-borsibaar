@@ -21,6 +21,11 @@ Josten & I Deliberately made changes to the same heading.
 **Feature Inventory responsive menu**
 https://github.com/taltech-vanemarendajaks/team-10-borsibaar/pull/23
 Create mobile-friendly menu on Inventory page. Done and merged.
+
+### Reimo
+
+**add workflow and conventions to claude.md file #24**
+https://github.com/taltech-vanemarendajaks/team-10-borsibaar/issues/24
  
 
 ## All Pull Requests
