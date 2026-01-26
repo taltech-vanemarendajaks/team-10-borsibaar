@@ -1,4 +1,4 @@
-thgsi line isreswerde for cnfl1ctz
+Change this line to create a conflict.
 
 ## What members were working on
 ### Miikael
@@ -12,7 +12,13 @@ Closed without merging - too complicate merge conflict.
 
 **Merge conflict**  
 https://github.com/taltech-vanemarendajaks/team-10-borsibaar/pull/33  
-Josten & I Deliberately made changes to the same heading.  
+Josten & I Deliberately made changes to the same heading. 
+
+### Varje
+
+**Feature Inventory responsive menu**
+https://github.com/taltech-vanemarendajaks/team-10-borsibaar/pull/23
+Create mobile-friendly menu on Inventory page. Done and merged.
  
 
 ## All Pull Requests
