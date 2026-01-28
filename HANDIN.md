@@ -31,6 +31,13 @@ https://github.com/taltech-vanemarendajaks/team-10-borsibaar/issues/24
 
 **ui-text-changes, dollar signs to euro signs**
 https://github.com/taltech-vanemarendajaks/team-10-borsibaar/issues/29
+### Romet
+
+**Add several small tweaks to inventory.java file**
+https://github.com/taltech-vanemarendajaks/team-10-borsibaar/pull/27
+Lazy-loading was already in effect, this change makes it visible in code aswell.
+created_at should never change after insert.
+Prevents accidental reassignment (transactions = new HashSet<>()).
 
 ## All Pull Requests
 
