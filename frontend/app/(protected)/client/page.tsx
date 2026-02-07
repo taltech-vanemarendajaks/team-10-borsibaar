@@ -163,6 +163,7 @@ export default function ClientProductsByCategory() {
                       </thead>
                       <tbody>
                         {items
+                          .filter((p) => p.quantity > 0)
                           .slice()
                           .sort((a, b) =>
                             a.productName.localeCompare(b.productName)
