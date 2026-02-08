@@ -605,7 +605,7 @@ export default function Inventory() {
                       </td>
                       <td className="py-3 px-4 text-center">
                         <span className="text-lg font-semibold text-gray-300">
-                          {parseFloat(item.quantity).toFixed(2)}
+                          {parseInt(item.quantity)}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
