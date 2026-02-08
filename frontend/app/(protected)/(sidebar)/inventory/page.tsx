@@ -163,7 +163,29 @@ export default function Inventory() {
     }
   };
 
+  // Sanity check for prices and quantity
+  const min = parseFloat(productForm.minPrice);
+  const max = parseFloat(productForm.maxPrice);
+  const current = parseFloat(productForm.currentPrice);
+  const quantity = parseFloat(productForm.initialQuantity);
+
+  const pricesEntered =
+    Number.isFinite(min) && Number.isFinite(max) && Number.isFinite(current);
+
+  const quantityEntered = Number.isFinite(quantity);
+
+  const nonNegative =
+    min >= 0 && max >= 0 && current >= 0;
+
+  const isPriceRangeValid =
+    pricesEntered && nonNegative && min <= max && current >= min && current <= max;
+
+  // create product
   const handleCreateProduct = async () => {
+    if (!isPriceRangeValid) {
+      alert("Invalid price configuration");
+      return;
+    }
     try {
       const productResponse = await fetch("/api/backend/product", {
         method: "POST",
@@ -675,6 +697,11 @@ export default function Inventory() {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 mt-4">
+             {pricesEntered && (min < 0 || max < 0 || current < 0) && (
+                <p className="text-sm text-red-500 mt-1">
+                  Prices cannot be negative.
+                </p>
+              )}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1">
                 Product Name *
@@ -716,6 +743,16 @@ export default function Inventory() {
               <label className="block text-sm font-medium text-gray-300 mb-1">
                 Price *
               </label>
+              {pricesEntered && current < min && (
+                <p className="text-sm text-red-500 mt-1">
+                  Price cannot be lower than min price
+                </p>
+              )}
+              {pricesEntered && current > max && (
+                <p className="text-sm text-red-500 mt-1">
+                  Price cannot be higher than max price
+                </p>
+              )}
               <Input
                 type="number"
                 step="0.01"
@@ -736,6 +773,11 @@ export default function Inventory() {
               <label className="block text-sm font-medium text-gray-300 mb-1">
                 Min price *
               </label>
+              {pricesEntered && min > max && (
+                <p className="text-sm text-red-500 mt-1">
+                  Min price cannot be greater than max price
+                </p>
+              )}
               <Input
                 type="number"
                 step="0.01"
@@ -793,6 +835,11 @@ export default function Inventory() {
               <label className="block text-sm font-medium text-gray-300 mb-1">
                 Initial Quantity
               </label>
+               {quantityEntered && quantity < 0 && (
+                <p className="text-sm text-red-500 mt-1">
+                  Quantity can not be negative.
+                </p>
+              )}
               <Input
                 type="number"
                 step="0.01"
@@ -909,8 +956,8 @@ export default function Inventory() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`p-3 rounded-lg cursor-pointer border transition
                     ${selectedCategory?.id === cat.id 
-                      ? "border-blue-500 bg-blue-900/30" 
-                      : "border-gray-700 hover:bg-gray-800"
+                        ? "border-blue-500 bg-blue-900/30"
+                        : "border-gray-700 hover:bg-gray-800"
                     }`}
                 >
                   <span className="font-medium">{cat.name}</span>
@@ -930,7 +977,7 @@ export default function Inventory() {
                 fetchInventory()
                 closeModals()
               }}
-              >
+            >
               Clear Filter
             </Button>
             <Button
@@ -938,7 +985,7 @@ export default function Inventory() {
               onClick={() => {
                 closeModals()
               }}
-              >
+            >
               Cancel
             </Button>
             <Button
