@@ -503,9 +503,6 @@ export default function Inventory() {
                 <Funnel className="w-4 h-4" />
                 <span className="flex">Filter by Category</span>
               </Button>
-              <div className="text-sm text-gray-400">
-                Total Items: {inventory.length}
-              </div>
             </div>
           </div>
         </div>
