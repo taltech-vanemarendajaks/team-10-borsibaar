@@ -4,17 +4,13 @@ on:
   push:
     branches: [ main ]
 
+env:
+  DEPLOY_PATH: ~/studentbar-pos-deploy
+  DOCKER_COMPOSE_FILE: docker-compose.prod.yaml
+
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-
-    env:
-      SSH_USER: ${{ secrets.SSH_USER }}
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      SERVER_IP: ${{ secrets.SERVER_IP }}
-      DEPLOY_PATH: ~/studentbar-pos-deploy
-      ENV_PRODUCTION_FILE: ${{ secrets.ENV_PRODUCTION_FILE }}
-      DOCKER_COMPOSE_FILE: docker-compose.prod.yaml
+    runs-on: [self-hosted, docker]
 
     steps:
       - name: Checkout code
@@ -49,10 +45,15 @@ jobs:
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan "$SERVER_IP" >> ~/.ssh/known_hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
 
       - name: Create .env.production from secret
         run: |
           printf '%s\n' "$ENV_PRODUCTION_FILE" > .env.production
+        env:
+          ENV_PRODUCTION_FILE: ${{ secrets.ENV_PRODUCTION_FILE }}
 
       - name: Create deployment package
         run: |
@@ -76,6 +77,9 @@ jobs:
             -o StrictHostKeyChecking=yes \
             deployment.tar.gz \
             "$SSH_USER@$SERVER_IP:/tmp/"
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
 
       - name: Deploy on server
         run: |
@@ -121,3 +125,7 @@ jobs:
           echo "Deployment complete!"
           docker compose -f "$DOCKER_COMPOSE_FILE" ps
           EOF
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+    
