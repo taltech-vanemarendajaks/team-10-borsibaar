@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  DEPLOY_PATH: ~/studentbar-pos-deploy
+  DEPLOY_PATH: ~/borsibaar
   DOCKER_COMPOSE_FILE: docker-compose.prod.yaml
 
 jobs:
